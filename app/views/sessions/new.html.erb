@@ -1,0 +1,23 @@
+<% if flash[:error] %>
+  <div>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<%= form_tag :session do %>
+  <%= fields_for :user do |user_fields| %>
+    <ul>
+      <li>
+        <%= user_fields.label :email %>
+        <%= user_fields.text_field :email %>
+      </li>
+      <li>
+        <%= user_fields.label :password %>
+        <%= user_fields.password_field :password %>
+      </li>
+      <li>
+        <%= submit_tag 'Login' %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
