@@ -1,4 +1,4 @@
-class ResponsesController < ApplicationController
+class ResponsesController < SurveysController
   def create
     params[:questions].each do |question_id, response_params|
       question = Question.find(question_id)
@@ -8,7 +8,6 @@ class ResponsesController < ApplicationController
       )
     end
 
-    flash[:notice] = 'Thanks for completing the survey.'
-    redirect_to root_path
+    redirect_to root_path, notice: 'Thanks for completing the survey.'
   end
 end
