@@ -1,1 +1,16 @@
 <h1><%= @survey.name %></h1>
+
+<%= form_tag responses_path do %>
+  <% @survey.questions.each do |question| %>
+    <div id=<%= dom_id(question) %>>
+      <%= fields_for "questions[#{question.id}]response",
+        question.responses.build do |response_fields| %>
+        <%= question.text %>
+        <%= response_fields.collection_radio_buttons(
+          :choice_id, question.choices, :id, :text) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= submit_tag 'Complete Survey' %>
+<% end %>
