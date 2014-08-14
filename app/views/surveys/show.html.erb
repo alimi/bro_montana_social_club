@@ -6,8 +6,13 @@
       <%= fields_for "questions[#{question.id}]response",
         question.responses.build do |response_fields| %>
         <%= question.text %>
-        <%= response_fields.collection_radio_buttons(
-          :choice_id, question.choices, :id, :text) %>
+        <% if question.allows_multiple_selections? %>
+         <%= response_fields.collection_check_boxes(
+           :choice_ids, question.choices, :id, :text) %>
+        <% else %>
+         <%= response_fields.collection_radio_buttons(
+           :choice_ids, question.choices, :id, :text) %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

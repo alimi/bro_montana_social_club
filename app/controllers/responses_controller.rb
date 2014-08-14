@@ -3,7 +3,7 @@ class ResponsesController < SurveysController
     params[:questions].each do |question_id, response_params|
       question = Question.find(question_id)
       question.responses.create(
-        choice: question.choices.find(response_params[:response][:choice_id]),
+        choice_ids: response_params[:response][:choice_ids],
         user: current_user
       )
     end
