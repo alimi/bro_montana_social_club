@@ -8,6 +8,12 @@ class ResponsesController < SurveysController
       )
     end
 
-    redirect_to root_path, notice: 'Thanks for completing the survey.'
+    flash[:notice] = 'Thanks for completing the survey.'
+
+    if !current_user.paid_annual_dues? && Due.for_this_year.any?
+      redirect_to new_payment_path
+    else
+      redirect_to root_path
+    end
   end
 end

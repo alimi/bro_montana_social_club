@@ -1,9 +1,3 @@
-<% if flash[:error] %>
-  <div>
-    <%= flash[:error] %>
-  </div>
-<% end %>
-
 <%= form_tag :session do %>
   <%= fields_for :user do |user_fields| %>
     <ul>

@@ -1,6 +1,6 @@
 <h1><%= @survey.name %></h1>
 
-<%= form_tag responses_path do %>
+<%= form_tag response_path do %>
   <% @survey.questions.each do |question| %>
     <div id=<%= dom_id(question) %>>
       <%= fields_for "questions[#{question.id}]response",
