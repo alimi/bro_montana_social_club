@@ -12,4 +12,15 @@ class User < ActiveRecord::Base
   def paid_annual_dues?
     payments.joins(:due).where('dues.year = ?', Date.current.year).any?
   end
+
+  def amount_of_annual_fund_contributions
+    return 0 if !responses.for_active_survey_fund_contribution_questions.any?
+
+    responses.
+      for_active_survey_fund_contribution_questions.
+      first.
+      choices.
+      map { |choice| choice.value }.
+      reduce { |sum, value| sum + value }
+  end
 end

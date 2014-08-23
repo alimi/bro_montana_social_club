@@ -15,7 +15,7 @@ gem 'wepay'
 gem 'spring', group: :development
 
 group :development, :test do
-  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :test do

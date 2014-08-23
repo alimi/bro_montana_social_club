@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140817192253) do
+ActiveRecord::Schema.define(version: 20140821022558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20140817192253) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "value"
+    t.integer  "value_type",  default: 0
   end
 
   create_table "dues", force: true do |t|
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140817192253) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "allows_multiple_selections", default: false
+    t.boolean  "about_fund_contributions"
   end
 
   create_table "responses", force: true do |t|
