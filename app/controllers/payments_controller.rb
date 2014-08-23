@@ -2,8 +2,15 @@ class PaymentsController < ApplicationController
   def new
     maybe_redirect_user
 
+    @annual_dues = Due.for_this_year.amount
+    @fund_contributions = current_user.amount_of_annual_fund_contributions
+    @total_due = @annual_dues + @fund_contributions
+
     @wepay_checkout_uri = WepayClient.get_checkout_uri_for_iframe_payment(
-      Due.for_this_year.amount, 'Annual Dues', payment_url)
+      @total_due,
+      'Annual Dues and Fund Contributions',
+      payment_url
+    )
   end
 
   def create
