@@ -1,0 +1,20 @@
+<h1>Welcome!</h1>
+
+<p>Complete this form to accept your invitation.</p>
+
+<%= form_for @invitation do |f| %>
+  <%= fields_for @user do |user_fields| %>
+    <ul>
+      <li>
+        <%= user_fields.label :password %>
+        <%= user_fields.password_field :password %>
+      </li>
+      <li>
+        <%= user_fields.label :password_confirmation %>
+        <%= user_fields.password_field :password_confirmation %>
+      </li>
+    </ul>
+  <% end %>
+
+  <%= f.submit 'Submit' %>
+<% end %>

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_one :invitation
+
   has_many :payments
   has_many :responses
 

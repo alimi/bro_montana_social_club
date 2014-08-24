@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :invitations, only: [:update] do
+    get :show, on: :collection
+  end
+
   resource :payment, only: [:new] do
     get :create, on: :collection
   end
