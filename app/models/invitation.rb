@@ -3,6 +3,14 @@ class Invitation < ActiveRecord::Base
 
   before_create :generate_token
 
+  def accepted?
+    expired? && user.valid?
+  end
+
+  def expired?
+    expired_at.present?
+  end
+
   private
 
   def generate_token

@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 describe Invitation do
-  let(:invitation) { Invitation.create! email: 'invited@user.com' }
+  let(:user) do
+    user = User.new email: 'invited@user.com'
+    user.save(validate: false)
+    user
+  end
+
+  let(:invitation) { user.create_invitation! }
 
   context 'before_create' do
     subject { invitation.token }

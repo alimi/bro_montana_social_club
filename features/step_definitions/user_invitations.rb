@@ -24,3 +24,17 @@ end
 Then(/^I should see the invitation page$/) do
   expect(page).to have_selector('form.edit_invitation')
 end
+
+Given(/^the invitation for "(.*?)" is expired$/) do |email|
+  user = User.find_by_email(email)
+  user.invitation.update_attributes(expired_at: 1.day.ago)
+end
+
+Then(/^I should see an expired invitation message$/) do
+  expect(page).to have_content('expired')
+end
+
+Given(/^the invitation for "(.*?)" has been accepted$/) do |email|
+  user = User.find_by_email(email)
+  user.invitation.update_attributes(expired_at: 1.day.ago)
+end

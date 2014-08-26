@@ -3,6 +3,8 @@ class InvitationsController < ApplicationController
 
   def show
     @invitation = Invitation.find_by_token(params[:token])
+    redirect_if_invitation_cannot_be_processed
+
     @user = @invitation.user
   end
 
@@ -12,9 +14,10 @@ class InvitationsController < ApplicationController
 
     if @user.update_attributes(user_params)
       @invitation.update_attributes(expired_at: DateTime.current)
+      flash.clear
       redirect_to root_path
     else
-      flash[:error] = @user.errors.full_messages.join('; ')
+      flash.now[:error] = @user.errors.full_messages.join('; ')
       render :show
     end
   end
@@ -23,5 +26,18 @@ class InvitationsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def redirect_if_invitation_cannot_be_processed
+    if @invitation.blank?
+      flash[:notice] = 'Please use a valid invitation.'
+      redirect_to root_path
+    elsif @invitation.accepted?
+      redirect_to root_path
+    elsif @invitation.expired?
+      flash[:notice] = 'This invitation is expired. ' +
+        'Contact the site admin for further instructions.'
+      redirect_to root_path
+    end
   end
 end
