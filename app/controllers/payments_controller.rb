@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
     @wepay_checkout_uri = WepayClient.get_checkout_uri_for_iframe_payment(
       @total_due,
       'Annual Dues and Fund Contributions',
-      payment_url
+      payments_url
     )
   end
 
