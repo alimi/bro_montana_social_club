@@ -6,7 +6,7 @@ Feature: User login
 
   Scenario: A user logs in with valid credentials
     When I login as "test@user.com" with "password"
-    Then I should see the currently active survery
+    Then I should see the currently active survey
 
   Scenario: A user logs in with invalid credentials
     When I login as "test@user.com" with "invalid_password"

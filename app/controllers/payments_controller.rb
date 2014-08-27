@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  include SessionManagement
+
   def new
     maybe_redirect_user
 
@@ -17,7 +19,10 @@ class PaymentsController < ApplicationController
     current_user.payments.create due: Due.for_this_year,
       wepay_checkout_id: params[:checkout_id]
 
-    redirect_to root_path, notice: 'Thanks for paying your annual dues!'
+    log_out
+
+    redirect_to root_path, notice: 'Thanks for paying your annual dues! ' +
+      "You've now been logged out."
   end
 
   private

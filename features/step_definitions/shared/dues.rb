@@ -13,5 +13,5 @@ When(/^"(.*?)" has paid annual dues$/) do |email|
 end
 
 Then(/^I should see the payment page$/) do
-  page.should have_selector 'h1', text: 'Dues'
+  expect(page).to have_selector('h1', text: 'Dues')
 end

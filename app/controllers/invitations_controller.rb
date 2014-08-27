@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  include SessionManagement
+
   skip_before_filter :authorize
 
   def show
@@ -15,6 +17,7 @@ class InvitationsController < ApplicationController
     if @user.update_attributes(user_params)
       @invitation.update_attributes(expired_at: DateTime.current)
       flash.clear
+      login(@user)
       redirect_to root_path
     else
       flash.now[:error] = @user.errors.full_messages.join('; ')

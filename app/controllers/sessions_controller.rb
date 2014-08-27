@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include SessionManagement
+
   skip_before_action :authorize
 
   before_action :allow_if_no_current_user
@@ -10,10 +12,10 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:user][:email])
 
     if user && user.authenticate(params[:user][:password])
-      session[:user_id] = user.id
+      login(user)
       redirect_to survey_path
     else
-      flash[:error] = 'Invalid username/password'
+      flash[:error] = 'Invalid email/password'
       render :new
     end
   end

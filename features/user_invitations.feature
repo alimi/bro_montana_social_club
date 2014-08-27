@@ -2,11 +2,13 @@ Feature: User invitations
 
   Background:
     Given there is an invitation for "invited@user.com"
+    And there is an active survey named "2014 Survey"
+    And the active survey has a question "What's your favorite color?" with the choices "red, blue, green"
 
   Scenario: A user accepts an invitation
     When I follow the invitation link sent to "invited@user.com"
     And I fill out my user information
-    Then I should see the homepage
+    Then I should see the currently active survey
 
   Scenario: A user tries to accept an invitation but enters invalid information
     When I follow the invitation link sent to "invited@user.com"
