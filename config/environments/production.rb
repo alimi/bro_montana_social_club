@@ -79,4 +79,19 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+
+  # Using Gmail for email delivery
+  config.after_initialize do
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain: 'bromontana.org',
+      user_name: Rails.application.secrets.gmail_username
+      password: Rails.application.secrets.gmail_password
+      authentication: 'plain',
+      enable_starttls_auto: true
+    }
+  end
 end
