@@ -84,15 +84,14 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'www.bromontana.org' }
 
-  # Using Gmail for email delivery
   config.after_initialize do
     config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
+      address: 'smtp.sendgrid.net',
       port: 587,
-      domain: 'bromontana.org',
-      user_name: Rails.application.secrets.gmail_username,
-      password: Rails.application.secrets.gmail_password,
       authentication: 'plain',
+      user_name: ENV['SENDGRID_USERNAME'],
+      password: ENV['SENDGRID_PASSWORD'],
+      domain: 'heroku.com',
       enable_starttls_auto: true
     }
   end
