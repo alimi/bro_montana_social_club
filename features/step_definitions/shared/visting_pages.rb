@@ -3,7 +3,7 @@ Then(/^I should see the survey page for the active survey$/) do
 end
 
 Then(/^I should see the homepage$/) do
-  expect(page).to have_content('Welcome Home!')
+  expect(page).to have_content('Welcome')
 end
 
 Then(/^I should see the currently active survey$/) do

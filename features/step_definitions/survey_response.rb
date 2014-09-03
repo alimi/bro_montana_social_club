@@ -15,5 +15,5 @@ Then(/^I should see a message that my response was submitted$/) do
 end
 
 Then(/^I should be redirected to the home page$/) do
-  expect(page).to have_content('Welcome Home')
+  expect(page).to have_content('Welcome')
 end
