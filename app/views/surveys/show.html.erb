@@ -1,18 +1,33 @@
 <h1><%= @survey.name %></h1>
 
 <%= form_tag responses_path do %>
-  <% @survey.questions.each do |question| %>
+  <% @survey.questions.each_with_index do |question, index| %>
     <div id=<%= dom_id(question) %>>
       <%= fields_for "questions[#{question.id}]response",
         question.responses.build do |response_fields| %>
-        <%= question.text %>
+
+        <strong><%= "#{index + 1}. #{question.text}" %></strong>
+
         <% if question.allows_multiple_selections? %>
-         <%= response_fields.collection_check_boxes(
-           :choice_ids, question.choices, :id, :text) %>
+          <%= response_fields.collection_check_boxes(
+            :choice_ids, question.choices, :id, :text) do |b| %>
+              <p>
+                <%= b.label do %>
+                  <%= b.check_box + b.text%>
+                <% end %>
+              </p>
+          <% end %>
         <% else %>
-         <%= response_fields.collection_radio_buttons(
-           :choice_ids, question.choices, :id, :text) %>
+          <%= response_fields.collection_radio_buttons(
+            :choice_ids, question.choices, :id, :text) do |b| %>
+              <p>
+                <%= b.label do %>
+                  <%= b.radio_button + b.text%>
+                <% end %>
+              </p>
+          <% end %>
         <% end %>
+
       <% end %>
     </div>
   <% end %>
