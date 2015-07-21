@@ -1,5 +1,5 @@
 class InvitationMailer < ActionMailer::Base
-  default from: 'do-not-reply@bromontanasocialclub.org'
+  default from: 'do-not-reply@bromontana.herokuapp.com'
 
   def invitation_email(user)
     @user = user
