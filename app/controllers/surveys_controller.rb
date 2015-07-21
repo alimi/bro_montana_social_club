@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
 
   def show
     if !current_user.completed_active_survey?
-      @survey = Survey.active
+      @survey = Survey.includes(questions: :choices).active
     else
       redirect_home_or_to_payment
     end
