@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.3.1'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'coffee-rails'
@@ -16,10 +16,6 @@ gem 'spring', group: :development
 
 group :development, :test do
   gem 'rspec-rails'
-end
-
-group :development do
-  gem 'mailcatcher'
 end
 
 group :test do
