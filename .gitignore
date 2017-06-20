@@ -7,9 +7,13 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore database config
-config/database.yml
-
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+/node_modules
+/yarn-error.log
+
+.byebug_history
