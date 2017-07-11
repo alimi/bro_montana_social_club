@@ -2,7 +2,7 @@ class YearsController < ApplicationController
   def show
     year = current_year || new_year
     next_task = year.next_task
-    render next_task.template, locals: { data: next_task.template_data }
+    render next_task.template, locals: next_task.template_data
   end
 
   def create

@@ -1,2 +1,22 @@
 <h1>Review Members</h1>
+
+<table>
+  <% members.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= member.email %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_with model: Member.new do |form| %>
+  <table>
+    <tr>
+      <td><%= form.text_field :name, placeholder: "Name" %></td>
+      <td><%= form.text_field :email, placeholder: "Email" %></td>
+      <td><%= form.submit "Add Member" %></td>
+    </tr>
+  </table>
+<% end %>
+
 <%= link_to "Next", year_path, method: :put, remote: true %>

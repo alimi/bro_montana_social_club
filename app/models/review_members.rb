@@ -8,6 +8,6 @@ class ReviewMembers
   end
 
   def template_data
-    { members: [] }
+    { members: Member.all }
   end
 end
