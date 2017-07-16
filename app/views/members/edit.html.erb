@@ -1,0 +1,8 @@
+<h1>Edit <%= @member.name %></h1>
+
+<%= form_with model: @member do |form| %>
+  <%= form.text_field :name %>
+  <%= form.text_field :email %>
+  <%= form.submit "Update Member" %>
+  <%= link_to "Cancel", year_path %>
+<% end %>

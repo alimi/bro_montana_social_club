@@ -5,6 +5,7 @@
     <tr>
       <td><%= member.name %></td>
       <td><%= member.email %></td>
+      <td><%= link_to "Edit", edit_member_path(member) %></td>
     </tr>
   <% end %>
 </table>

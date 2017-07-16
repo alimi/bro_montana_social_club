@@ -8,6 +8,6 @@ class ReviewMembers
   end
 
   def template_data
-    { members: Member.all }
+    { members: Member.order(:id) }
   end
 end
