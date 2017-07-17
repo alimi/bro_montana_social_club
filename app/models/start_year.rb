@@ -8,5 +8,6 @@ class StartYear
   end
 
   def template_data
+    {}
   end
 end
