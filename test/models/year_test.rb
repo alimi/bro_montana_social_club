@@ -27,4 +27,18 @@ class YearTest < ActiveSupport::TestCase
     assert_nil year.next_task,
       "It returns nil"
   end
+
+  test "valid? when a year with the calendar year already exists" do
+    another_year = Year.create!(
+      calendar_year: 1984,
+      next_task: StartYear.new
+    )
+
+    year = Year.new(calendar_year: 1984)
+
+    year.valid?
+
+    assert year.errors[:calendar_year].present?,
+      "It adds an error on calendar year"
+  end
 end

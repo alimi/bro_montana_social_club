@@ -1,4 +1,5 @@
 class Year < ApplicationRecord
+  validates :calendar_year, uniqueness: true
   validate :next_task_is_known
 
   def next_task=(new_task)
