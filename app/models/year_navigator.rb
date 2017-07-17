@@ -8,6 +8,5 @@ class YearNavigator
 
   def progress
     year.update!(next_task: current_task.next_task)
-    year.next_task
   end
 end
