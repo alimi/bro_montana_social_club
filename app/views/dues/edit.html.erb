@@ -1,0 +1,8 @@
+<h1>Edit Dues</h1>
+
+<%= form_with model: @dues, url: year_dues_path, method: :put do |form| %>
+  <%= form.label :amount_dollars, "Amount" %>
+  <%= form.number_field :amount_dollars, step: "0.01" %>
+  <%= form.submit "Update Dues" %>
+  <%= link_to "Cancel", year_path %>
+<% end %>

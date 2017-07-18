@@ -1,1 +1,6 @@
 <h1>Review Dues</h1>
+
+<%= number_to_currency(dues.amount_dollars) %> paid annualy
+
+<%= link_to "Edit dues", edit_year_dues_path %>
+<%= link_to "Next", year_path, method: :put, remote: true %>

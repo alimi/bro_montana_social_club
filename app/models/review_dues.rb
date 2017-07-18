@@ -7,6 +7,16 @@ class ReviewDues
   end
 
   def template_data
-    { dues: 25 }
+    { dues: dues }
+  end
+
+  private
+
+  def dues
+    Dues.new(amount_cents: year.dues_cents)
+  end
+
+  def year
+    Year.order(calendar_year: :desc).first
   end
 end
