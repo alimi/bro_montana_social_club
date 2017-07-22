@@ -18,7 +18,7 @@ class YearsController < ApplicationController
   private
 
   def current_year
-    Year.order(calendar_year: :desc).first
+    CurrentYear.find
   end
 
   def new_year

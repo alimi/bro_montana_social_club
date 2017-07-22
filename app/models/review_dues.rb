@@ -17,6 +17,6 @@ class ReviewDues
   end
 
   def year
-    Year.order(calendar_year: :desc).first
+    CurrentYear.find
   end
 end
