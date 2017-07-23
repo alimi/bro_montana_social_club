@@ -10,6 +10,7 @@
     <tr>
       <td><%= fund.name %></td>
       <td><%= number_to_currency(fund.contribution_amount_dollars) %></td>
+      <td><%= link_to "Edit", edit_year_fund_path(fund) %></td>
     </tr>
   <% end %>
 </table>

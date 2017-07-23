@@ -7,6 +7,6 @@ class ReviewFunds
   end
 
   def template_data
-    { funds: Fund.all }
+    { funds: Fund.order(:id) }
   end
 end

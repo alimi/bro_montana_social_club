@@ -1,0 +1,12 @@
+<h1>Edit Fund</h1>
+
+<%= form_with model: [:year, @fund] do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :amount_dollars %>
+  <%= form.number_field :contribution_amount_dollars, step: "0.01" %>
+
+  <%= form.submit "Update Fund" %>
+  <%= link_to "Cancel", year_path %>
+<% end %>
