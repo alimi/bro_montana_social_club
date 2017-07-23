@@ -1,0 +1,29 @@
+<h1>Review Funds</h1>
+
+<table>
+  <tr>
+    <th>Fund Name</th>
+    <th>Contribution Amount</th>
+  </tr>
+
+  <% funds.each do |fund| %>
+    <tr>
+      <td><%= fund.name %></td>
+      <td><%= number_to_currency(fund.contribution_amount_dollars) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_with model: [:year, Fund.new] do |form| %>
+  <table>
+    <tr>
+      <td><%= form.text_field :name, placeholder: "Name" %></td>
+      <td>
+        <%= form.number_field :contribution_amount_dollars, step: "0.01" %>
+      </td>
+      <td><%= form.submit "Add Fund" %></td>
+    </tr>
+  </table>
+<% end %>
+
+<%= link_to "Next", year_path, method: :put, remote: true %>

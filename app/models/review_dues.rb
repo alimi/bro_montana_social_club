@@ -1,5 +1,6 @@
 class ReviewDues
   def next_task
+    ReviewFunds.new
   end
 
   def template

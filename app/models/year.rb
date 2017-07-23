@@ -2,6 +2,8 @@ class Year < ApplicationRecord
   validates :calendar_year, uniqueness: true
   validate :next_task_is_known
 
+  has_many :funds
+
   def next_task=(new_task)
     super(new_task.class)
   end
@@ -20,6 +22,6 @@ class Year < ApplicationRecord
   end
 
   def known_task_classes
-    [ReviewDues, ReviewMembers, StartYear]
+    [ReviewDues, ReviewMembers, StartYear, ReviewFunds]
   end
 end
