@@ -15,4 +15,3 @@ class Dues
     self.amount_cents = new_amount.to_f * 100
   end
 end
-
