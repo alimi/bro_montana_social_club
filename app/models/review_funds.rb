@@ -7,6 +7,12 @@ class ReviewFunds
   end
 
   def template_data
-    { funds: Fund.order(:id) }
+    { funds: year.funds.order(:id) }
+  end
+
+  private
+
+  def year
+    CurrentYear.find
   end
 end
