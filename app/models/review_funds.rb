@@ -1,5 +1,6 @@
 class ReviewFunds
   def next_task
+    AddPotentialMeetingTimes.new
   end
 
   def template

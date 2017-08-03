@@ -1,0 +1,41 @@
+<h1>Add Potential Meeting Dates</h1>
+
+<table>
+  <% potential_meeting_times.each do |potential_meeting_time| %>
+    <tr>
+      <td><%= potential_meeting_time.strftime("%B %-d") %></td>
+      <td><%= potential_meeting_time.strftime("%-l:00 %p %Z") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_with model: PotentialMeetingTime.new, url: year_potential_meeting_times_path do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.select :month,
+          options_from_collection_for_select(months, :to_s, :to_s)
+        %>
+      </td>
+      <td>
+        <%= form.select :day,
+          options_from_collection_for_select(days, :to_s, :to_s)
+        %>
+      </td>
+      <td>
+        <%= form.select :starting_at,
+          options_from_collection_for_select(hours, :to_s, :to_s)
+        %>
+      </td>
+      <td>
+        <%= form.time_zone_select :time_zone,
+          ActiveSupport::TimeZone.us_zones,
+          default: "Eastern Time (US & Canada)"
+        %>
+      </td>
+      <td><%= form.submit "Add Potential Meeting Time" %></td>
+    </tr>
+  </table>
+<% end %>
+
+<%= link_to "Next", year_path, method: :put, remote: true %>
