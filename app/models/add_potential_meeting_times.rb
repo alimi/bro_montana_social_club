@@ -8,10 +8,8 @@ class AddPotentialMeetingTimes
 
   def template_data
     {
-      months: months,
-      days: days,
-      hours: hours,
-      potential_meeting_times: potential_meeting_times
+      potential_meeting_times: potential_meeting_times,
+      new_potential_meeting_time: new_potential_meeting_time
     }
   end
 
@@ -19,26 +17,30 @@ class AddPotentialMeetingTimes
 
   def potential_meeting_times
     year.potential_meeting_times.sort.map do |time|
-      time.in_time_zone("Eastern Time (US & Canada)")
+      time.in_time_zone(default_time_zone)
     end
+  end
+
+  def new_potential_meeting_time
+    PotentialMeetingTime.new(
+      month: current_time.month,
+      day: current_time.day,
+      year: current_time.year,
+      hour: current_time.hour,
+      time_zone: default_time_zone
+    )
+  end
+
+  def current_time
+    @current_time ||=
+      Time.current.in_time_zone(default_time_zone).beginning_of_day
+  end
+
+  def default_time_zone
+    PotentialMeetingTime::DEFAULT_TIME_ZONE
   end
 
   def year
     CurrentYear.find
-  end
-
-  def months
-    Date::MONTHNAMES.select(&:present?)
-  end
-
-  def days
-    (1..31).to_a
-  end
-
-  def hours
-    digits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-    am_hours = digits.map { |hour| "#{hour}:00 AM" }
-    pm_hours = digits.map { |hour| "#{hour}:00 PM" }
-    am_hours + pm_hours
   end
 end

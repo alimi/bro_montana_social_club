@@ -5,32 +5,39 @@
     <tr>
       <td><%= potential_meeting_time.strftime("%B %-d") %></td>
       <td><%= potential_meeting_time.strftime("%-l:00 %p %Z") %></td>
+      <td>
+        <%= link_to "Edit",
+          edit_year_potential_meeting_time_path(potential_meeting_time.to_i) %>
+      </td>
     </tr>
   <% end %>
 </table>
 
-<%= form_with model: PotentialMeetingTime.new, url: year_potential_meeting_times_path do |form| %>
+<%= form_with model: new_potential_meeting_time, url: year_potential_meeting_times_path do |form| %>
   <table>
     <tr>
       <td>
-        <%= form.select :month,
-          options_from_collection_for_select(months, :to_s, :to_s)
+        <%= select_month new_potential_meeting_time,
+          prefix: :potential_meeting_time,
+          field_name: :month
         %>
       </td>
       <td>
-        <%= form.select :day,
-          options_from_collection_for_select(days, :to_s, :to_s)
+        <%= select_day new_potential_meeting_time,
+          prefix: :potential_meeting_time,
+          field_name: :day
         %>
       </td>
       <td>
-        <%= form.select :starting_at,
-          options_from_collection_for_select(hours, :to_s, :to_s)
+        <%= select_hour new_potential_meeting_time,
+          ampm: true,
+          prefix: :potential_meeting_time,
+          field_name: :hour
         %>
       </td>
       <td>
         <%= form.time_zone_select :time_zone,
-          ActiveSupport::TimeZone.us_zones,
-          default: "Eastern Time (US & Canada)"
+          ActiveSupport::TimeZone.us_zones
         %>
       </td>
       <td><%= form.submit "Add Potential Meeting Time" %></td>

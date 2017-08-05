@@ -1,13 +1,27 @@
 class PotentialMeetingTime
   include ActiveModel::Model
 
-  attr_accessor :month, :day, :year, :starting_at, :time_zone
+  DEFAULT_TIME_ZONE = "Eastern Time (US & Canada)"
 
-  def time_zone=(new_time_zone_name)
-    @time_zone = ActiveSupport::TimeZone.new(new_time_zone_name)
+  attr_accessor :month, :day, :year, :hour, :time_zone
+
+  def self.from_id(id)
+    time = Time.at(id).in_time_zone(DEFAULT_TIME_ZONE)
+
+    PotentialMeetingTime.new(
+      month: time.month,
+      day: time.day,
+      year: time.year,
+      hour: time.hour,
+      time_zone: DEFAULT_TIME_ZONE
+    )
+  end
+
+  def id
+    to_time.to_i
   end
 
   def to_time
-    time_zone.parse("#{month} #{day}, #{year} #{starting_at}")
+    ActiveSupport::TimeZone.new(time_zone).local(year, month, day, hour)
   end
 end

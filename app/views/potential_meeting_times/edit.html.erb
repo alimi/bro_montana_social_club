@@ -1,0 +1,37 @@
+<h1>Edit Potential Meeting Time</h1>
+
+<%= form_with model: @potential_meeting_time,
+  url: year_potential_meeting_time_path(@potential_meeting_time.id),
+  method: :put do |form|
+%>
+  <table>
+    <tr>
+      <td>
+        <%= select_month @potential_meeting_time,
+          prefix: :potential_meeting_time,
+          field_name: :month
+        %>
+      </td>
+      <td>
+        <%= select_day @potential_meeting_time,
+          prefix: :potential_meeting_time,
+          field_name: :day
+        %>
+      </td>
+      <td>
+        <%= select_hour @potential_meeting_time,
+          ampm: true,
+          prefix: :potential_meeting_time,
+          field_name: :hour
+        %>
+      </td>
+      <td>
+        <%= form.time_zone_select :time_zone,
+          ActiveSupport::TimeZone.us_zones
+        %>
+      </td>
+      <td><%= form.submit "Update Potential Meeting Time" %></td>
+      <td><%= link_to "Cancel", year_path %></td>
+    </tr>
+  </table>
+<% end %>
