@@ -1,5 +1,6 @@
 class AddPotentialMeetingTimes
   def next_task
+    ManageQuestionaires.new
   end
 
   def template

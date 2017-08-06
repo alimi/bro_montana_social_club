@@ -22,6 +22,13 @@ class Year < ApplicationRecord
   end
 
   def known_task_classes
-    [ReviewDues, ReviewMembers, StartYear, ReviewFunds, AddPotentialMeetingTimes]
+    [
+      ReviewDues,
+      ReviewMembers,
+      StartYear,
+      ReviewFunds,
+      AddPotentialMeetingTimes,
+      ManageQuestionaires
+    ]
   end
 end
