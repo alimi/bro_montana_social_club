@@ -3,6 +3,7 @@ class Year < ApplicationRecord
   validate :next_task_is_known
 
   has_many :funds
+  has_many :questionaires
 
   def next_task=(new_task)
     super(new_task.class)

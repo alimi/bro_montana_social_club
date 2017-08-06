@@ -1,0 +1,11 @@
+<h1>Manage Questionaires</h1>
+
+<table>
+  <% questionaires.each do |questionaire| %>
+    <tr>
+      <td><%= questionaire.member_name %></td>
+      <td><%= questionaire.current_status %></td>
+      <td><%= button_to "Send", "#" %></td>
+    </tr>
+  <% end %>
+</table>
