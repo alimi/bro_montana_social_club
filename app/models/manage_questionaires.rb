@@ -14,7 +14,7 @@ class ManageQuestionaires
 
   def questionaires
     create_missing_questionaires
-    year.questionaires
+    year.questionaires.order(:member_id)
   end
 
   def create_missing_questionaires
@@ -26,7 +26,7 @@ class ManageQuestionaires
     ")
 
     members_without_questionaires.each do |member|
-      member.questionaires.create!(year: year)
+      member.questionaires.create!(year: year, token: SecureRandom.uuid)
     end
   end
 

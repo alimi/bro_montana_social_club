@@ -1,0 +1,19 @@
+<p>
+  Hi <%= @questionaire.member_name %>,
+</p>
+
+<p>
+  Brobot here letting you know the <%= @questionaire.calendar_year %> Questionaire is now available. <%= link_to "Click here", questionaire_url(token: @questionaire.token) %> to take it.
+</p>
+
+<p>
+  Don't delay! I'm a robot that's been scientifically enginereed to keep bugging you until you complete the <%= @questionaire.calendar_year %> Questionaire. I might not be the coolest robot you've ever seen, but I'm really good at doing repetitive tasks like emailing you over and over and over...
+</p>
+
+<p>Brobot</p>
+
+<%= image_tag "http://i.imgur.com/rXrwFMa.jpg" %>
+
+<p>
+  Why are you still reading this? Do you want me to spam you, bro? <%= link_to "Take the #{@questionaire.calendar_year} Questionaire." , questionaire_url(token: @questionaire.token) %>
+</p>

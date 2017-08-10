@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   end
 
   resources :members, only: [:create, :edit, :update]
+  resources :questionaire_deliveries, only: [:create]
+  resources :questionaire, only: [:show], param: :token
 end

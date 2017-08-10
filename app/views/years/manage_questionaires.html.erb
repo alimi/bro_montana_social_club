@@ -5,7 +5,12 @@
     <tr>
       <td><%= questionaire.member_name %></td>
       <td><%= questionaire.current_status %></td>
-      <td><%= button_to "Send", "#" %></td>
+      <td>
+        <%= button_to "Send",
+          questionaire_deliveries_path(questionaire_id: questionaire.id),
+          remote: true
+        %>
+      </td>
     </tr>
   <% end %>
 </table>

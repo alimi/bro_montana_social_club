@@ -1,0 +1,9 @@
+Hi <%= @questionaire.member_name %>,
+
+Did you get that last email I sent you? The one about the <%= @questionaire.calendar_year %> Questionaire?
+
+In case you didn't get it, the <%= @questionaire.calendar_year %> Questionaire is now available. <%= link_to "Click here", questionaire_url(token: @questionaire.token) %> to take it.
+
+If you have any problems, bring it up with the commish. I'm just a robot.
+
+Brobot 🤖
