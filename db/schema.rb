@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170806185224) do
     t.integer "member_id"
     t.string "token"
     t.datetime "available_meeting_times", array: true
-    t.integer "contributing_fund_ids"
+    t.integer "contributing_fund_ids", array: true
     t.datetime "delivered_at"
     t.datetime "completed_at"
     t.datetime "created_at", null: false
