@@ -21,6 +21,10 @@ class PotentialMeetingTime
     to_time.to_i
   end
 
+  def to_s
+    to_time.strftime("%A, %B %e at %l:00 %p")
+  end
+
   def to_time
     ActiveSupport::TimeZone.new(time_zone).local(year, month, day, hour)
   end

@@ -4,6 +4,7 @@ class Questionaire < ApplicationRecord
 
   delegate :name, :email, to: :member, prefix: true
   delegate :calendar_year, to: :year
+  delegate :funds, to: :year
 
   def current_status
     statuses.find { |status| status.current }
@@ -19,6 +20,16 @@ class Questionaire < ApplicationRecord
 
   def completed?
     completed_at.present?
+  end
+
+  def potential_meeting_times
+    year.potential_meeting_times.sort.map do |time|
+      PotentialMeetingTime.from_id(time.to_i)
+    end
+  end
+
+  def to_param
+    token
   end
 
   private

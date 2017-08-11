@@ -3,7 +3,7 @@
 </p>
 
 <p>
-  Brobot here letting you know the <%= @questionaire.calendar_year %> Questionaire is now available. <%= link_to "Click here", questionaire_url(token: @questionaire.token) %> to take it.
+  Brobot here letting you know the <%= @questionaire.calendar_year %> Questionaire is now available. <%= link_to "Click here", questionaire_url(@questionaire) %> to take it.
 </p>
 
 <p>
@@ -15,5 +15,5 @@
 <%= image_tag "http://i.imgur.com/rXrwFMa.jpg" %>
 
 <p>
-  Why are you still reading this? Do you want me to spam you, bro? <%= link_to "Take the #{@questionaire.calendar_year} Questionaire." , questionaire_url(token: @questionaire.token) %>
+  Why are you still reading this? Do you want me to spam you, bro? <%= link_to "Take the #{@questionaire.calendar_year} Questionaire." , questionaire_url(@questionaire) %>
 </p>

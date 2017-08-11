@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :members, only: [:create, :edit, :update]
   resources :questionaire_deliveries, only: [:create]
-  resources :questionaire, only: [:show], param: :token
+  resources :questionaires, only: [:show, :update], param: :token
 end

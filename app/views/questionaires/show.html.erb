@@ -1,0 +1,49 @@
+<p>
+  Hi, <%= @questionaire.member_name %>. Welcome to the <%= @questionaire.calendar_year %> Questionaire.
+</p>
+
+<%= form_with model: @questionaire do |form|%>
+  <p>
+    1. Please choose all times that you're available for the annual members meeting.
+  </p>
+
+  <em>All times are Eastern</em>
+
+  <p>
+    <%= form.collection_check_boxes :available_meeting_times,
+      @questionaire.potential_meeting_times,
+      :to_time,
+      :to_s do |input|
+    %>
+      <%= label_tag do %>
+        <%= input.check_box %>
+        <%= input.text %>
+      <% end %>
+
+      <br/>
+    <% end %>
+  </p>
+
+  <p>
+    2. Please choose all the funds you wish to contribut to this year.
+  </p>
+
+  <p>
+    <%= form.collection_check_boxes :contributing_fund_ids,
+      @questionaire.funds,
+      :id,
+      :to_s do |input|
+    %>
+      <%= label_tag do %>
+        <%= input.check_box %>
+        <%= number_to_currency(input.object.contribution_amount_dollars) %>
+        to
+        <%= input.object.name %>
+      <% end %>
+
+      <br/>
+    <% end %>
+  </p>
+
+  <%= form.submit "Next" %>
+<% end %>

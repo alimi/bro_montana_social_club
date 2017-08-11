@@ -13,7 +13,7 @@ class QuestionaireMailerPreview < ActionMailer::Preview
   def questionaire
     Questionaire.new(
       year: year,
-      token: "42",
+      token: "abcd-42",
       member: member
     )
   end
