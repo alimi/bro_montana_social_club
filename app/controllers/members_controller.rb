@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  include Authenticable
+
   def create
     Member.create!(member_params)
     redirect_to year_path

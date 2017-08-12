@@ -1,4 +1,6 @@
 class YearsController < ApplicationController
+  include Authenticable
+
   def show
     year = current_year || new_year
     next_task = year.next_task

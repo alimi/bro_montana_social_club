@@ -1,4 +1,6 @@
 class PotentialMeetingTimesController < ApplicationController
+  include Authenticable
+
   def create
     potential_meeting_time = PotentialMeetingTime.
       new(potential_meeting_time_params)

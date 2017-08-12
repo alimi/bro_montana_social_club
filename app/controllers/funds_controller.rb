@@ -1,4 +1,6 @@
 class FundsController < ApplicationController
+  include Authenticable
+
   def create
     year.funds.create!(fund_params)
     redirect_to year_path

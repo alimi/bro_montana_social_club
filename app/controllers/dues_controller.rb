@@ -1,4 +1,6 @@
 class DuesController < ApplicationController
+  include Authenticable
+
   def edit
     @dues = Dues.new(amount_cents: year.dues_cents)
   end
