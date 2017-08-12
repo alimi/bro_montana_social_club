@@ -1,0 +1,9 @@
+<h1><%= @payment.calendar_year %> Questionaire</h1>
+
+<p>
+  This year's dues are <%= number_to_currency(@payment.dues_dollars) %>, and you've chosen to contribute <%= number_to_currency(@payment.fund_contribution_dollars) %> to our funds. This makes your total amount due <%= number_to_currency(@payment.amount_dollars) %>.
+</p>
+
+<p>
+  Please <%= link_to "click here", @payment.external_url %> to submit your payment via Wepay. You'll be redirected back when you're done.
+</p>

@@ -1,18 +1,25 @@
 class QuestionairesController < ApplicationController
   def show
-    @questionaire = Questionaire.find_by!(token: params[:token])
+    if questionaire.completed?
+      render "questionaires/complete"
+    else
+      render :show
+    end
   end
 
   def update
-    questionaire = Questionaire.find_by!(token: params[:token])
     questionaire.update!(
       questionaire_params.merge(completed_at: DateTime.current)
     )
 
-    redirect_to action: :show
+    redirect_to new_questionaire_payment_path(questionaire)
   end
 
   private
+
+  def questionaire
+    @questionaire ||= Questionaire.find_by!(token: params[:token])
+  end
 
   def questionaire_params
     params.

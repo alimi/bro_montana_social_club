@@ -5,6 +5,7 @@ class Questionaire < ApplicationRecord
   delegate :name, :email, to: :member, prefix: true
   delegate :calendar_year, to: :year
   delegate :funds, to: :year
+  delegate :dues_cents, to: :year
 
   def current_status
     statuses.find { |status| status.current }
@@ -19,7 +20,11 @@ class Questionaire < ApplicationRecord
   end
 
   def completed?
-    completed_at.present?
+    completed_at.present? && paid_at.present?
+  end
+
+  def fund_contribution_cents
+    Fund.where(id: contributing_fund_ids).sum(:contribution_amount_cents)
   end
 
   def potential_meeting_times
