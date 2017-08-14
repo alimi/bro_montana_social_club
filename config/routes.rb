@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "static_pages#home"
+
   resource :year, only: [:show, :create, :update] do
     resource :dues, only: [:edit, :update]
     resources :funds, only: [:create, :edit, :update]
