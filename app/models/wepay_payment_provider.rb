@@ -6,7 +6,7 @@ class WepayPaymentProvider
       short_description: description,
       type: "personal",
       currency: "USD",
-      fee_payer: "payee",
+      fee_payer: "payer",
       redirect_uri: redirect_url
     })
 
