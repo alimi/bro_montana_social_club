@@ -2,7 +2,7 @@ class WepayPaymentProvider
   def external_url(amount_dollars:, description:, redirect_url:)
     response = api_client.call("/checkout/create", access_token, {
       account_id: account_id,
-      amount: 22.61,
+      amount: amount_dollars,
       short_description: description,
       type: "personal",
       currency: "USD",
