@@ -11,7 +11,7 @@ class Payment
     payment_provider.external_url(
       amount_dollars: amount_dollars,
       description: "Annual Dues and Fund Contributions",
-      redirect_url: questionaire_payment_url(questionaire, host: "localhost:3000")
+      redirect_url: questionaire_payment_url(questionaire, host: "https://bromontana.herokuapp.com")
     )
   end
 
