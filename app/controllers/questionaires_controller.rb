@@ -1,6 +1,4 @@
 class QuestionairesController < ApplicationController
-  include Authenticable
-
   def show
     if questionaire.completed?
       render "questionaires/complete"
