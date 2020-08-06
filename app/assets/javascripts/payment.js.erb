@@ -1,0 +1,44 @@
+document.addEventListener("turbolinks:load", function() {
+  var paymentForm = document.querySelector("form[data-card-container]");
+
+  if(paymentForm) {
+    loadPaymentForm(paymentForm);
+  }
+})
+
+function loadPaymentForm(form) {
+  var stripe = Stripe(<%= "'#{Rails.application.secrets.stripe_public_key}'" %>);
+  var elements = stripe.elements();
+
+  var cardElement = elements.create('card');
+  cardElement.mount(form.dataset.cardContainer);
+
+  var resultContainer = form.querySelector(form.dataset.resultContainer);
+
+  cardElement.on('change', function(event) {
+    if (event.error) {
+      resultContainer.textContent = event.error.message;
+    } else {
+      resultContainer.textContent = '';
+    }
+  });
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    resultContainer.textContent = "";
+
+    stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    }).then(handlePaymentMethodResult);
+  });
+
+  function handlePaymentMethodResult(result) {
+    if (result.error) {
+      resultContainer.textContent = result.error.message;
+    } else {
+      form.querySelector(form.dataset.formInput).value = result.paymentMethod.id;
+      form.submit();
+    }
+  }
+}

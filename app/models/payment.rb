@@ -1,18 +1,27 @@
 class Payment
   include Rails.application.routes.url_helpers
 
-  attr_reader :questionaire
+  attr_reader :questionaire, :error
 
   def initialize(questionaire:)
     @questionaire = questionaire
+    @error = nil
   end
 
-  def external_url
-    payment_provider.external_url(
-      amount_dollars: amount_dollars,
-      description: "Annual Dues and Fund Contributions",
-      redirect_url: questionaire_payment_url(questionaire, host: "https://bromontana.herokuapp.com")
+  def process(payment_method_id)
+    Stripe.api_key ||= Rails.application.secrets.stripe_secret_key
+
+    intent = Stripe::PaymentIntent.create(
+      amount: amount_cents,
+      currency: "usd",
+      payment_method: payment_method_id,
+      confirm: true
     )
+
+    questionaire.update!(paid_at: DateTime.current, payment_token: intent.id)
+  rescue Stripe::CardError => e
+    @error = e.error.message
+    false
   end
 
   def amount_dollars
@@ -33,11 +42,5 @@ class Payment
 
   def calendar_year
     questionaire.calendar_year
-  end
-
-  private
-
-  def payment_provider
-    WepayPaymentProvider.new
   end
 end

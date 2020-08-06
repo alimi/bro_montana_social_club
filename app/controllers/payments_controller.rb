@@ -4,12 +4,14 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    questionaire.update!(
-      paid_at: DateTime.current,
-      payment_token: params[:checkout_id]
-    )
+    @payment = Payment.new(questionaire: questionaire)
 
-    render "questionaires/complete"
+    if @payment.process(params[:payment_method_id])
+      redirect_to questionaire_path(questionaire)
+    else
+      @error = @payment.error
+      render :new
+    end
   end
 
   private

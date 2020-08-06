@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   resources :questionaire_deliveries, only: [:create]
 
   resources :questionaires, only: [:show, :update], param: :token do
-    resource :payment, only: [:new] do
-      get :create, on: :member
-    end
+    resource :payment, only: [:new, :create]
   end
 end
