@@ -13,8 +13,10 @@ class PaymentTest < ActiveSupport::TestCase
 
     payment = Payment.new(questionaire: questionaire)
 
-    assert_equal 3500, payment.amount_cents,
-      "It returns the sum of the questionaire's selected funds and the year's dues"
+    expected = 2500 + 500 + 500 + 135
+
+    assert_equal expected, payment.amount_cents,
+      "It returns the sum of the questionaire's selected funds and the year's dues plus payment processor fees"
   end
 
   test "#amount_dollars" do
@@ -29,7 +31,9 @@ class PaymentTest < ActiveSupport::TestCase
 
     payment = Payment.new(questionaire: questionaire)
 
-    assert_equal 35.0, payment.amount_dollars,
+    expected = 25 + 5 + 5 + 1.35
+
+    assert_equal 36.35, payment.amount_dollars,
       "It returns amount cents in dollars"
   end
 end

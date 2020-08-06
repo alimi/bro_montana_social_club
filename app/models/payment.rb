@@ -1,5 +1,6 @@
 class Payment
-  include Rails.application.routes.url_helpers
+  PROCESSOR_FIXED_FEE_CENTS = 30
+  PROCESSOR_PERCENT_FEE = 0.029
 
   attr_reader :questionaire, :error
 
@@ -29,6 +30,18 @@ class Payment
   end
 
   def amount_cents
+    ((questionaire_total_cents + PROCESSOR_FIXED_FEE_CENTS) / (1 - PROCESSOR_PERCENT_FEE)).round
+  end
+
+  def processor_fees_dollars
+    processor_fees_cents / 100.0
+  end
+
+  def processor_fees_cents
+    amount_cents - questionaire_total_cents
+  end
+
+  def questionaire_total_cents
     questionaire.dues_cents + questionaire.fund_contribution_cents
   end
 
