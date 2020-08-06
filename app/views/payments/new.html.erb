@@ -1,20 +1,38 @@
 <h1><%= @payment.calendar_year %> Questionaire</h1>
 
 <% if @error %>
-  <p><%= @error %> Please try again.</p>
+  <p class="error"><%= @error %> Please try again.</p>
 <% end %>
 
+<p>Please pay your annual dues and fund contributions below.</p>
+
+<dl>
+  <dt>Annual Dues</dt>
+  <dd><%= number_to_currency(@payment.dues_dollars) %></dd>
+
+  <dt>Fund Contributions</dt>
+  <dd><%= number_to_currency(@payment.fund_contribution_dollars) %></dd>
+
+  <dt>Payment Processor Fees</dt>
+  <dd><%= number_to_currency(@payment.processor_fees_dollars) %></dd>
+
+  <dt>Total</dt>
+  <dd><%= number_to_currency(@payment.amount_dollars) %></dd>
+</dl>
+
 <p>
-  This year's dues are <%= number_to_currency(@payment.dues_dollars) %>, and you've chosen to contribute <%= number_to_currency(@payment.fund_contribution_dollars) %> to our funds. This makes your total amount due <%= number_to_currency(@payment.amount_dollars) %>.
-</p>
+  <%= link_to("https://stripe.com/") do %>
+    <%= image_tag("powered_by_stripe.png", alt: "Powered by Stripe") %>
+  <% end %>
+<p>
 
 <%= form_with(
       url: questionaire_payment_path(@payment.questionaire),
       data: { card_container: "#card-element", result_container: "#result", form_input: "[name='payment_method_id']" }
 ) do |form| %>
   <div id="card-element"></div>
-  <p id="result"></p>
+  <p id="result" class="error"></p>
 
   <%= form.hidden_field :payment_method_id %>
-  <%= form.submit "Pay" %>
+  <%= form.submit "Pay #{number_to_currency(@payment.amount_dollars)}" %>
 <% end %>
